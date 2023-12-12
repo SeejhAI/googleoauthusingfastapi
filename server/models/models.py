@@ -12,7 +12,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String)
     email = Column(String)
-    password = Column(String)
+    hashed_password = Column(String)
     billing_address = Column(String,nullable=True)
     shipping_address = Column(String,nullable=True)
     created_at = Column(TIMESTAMP(timezone=True),
