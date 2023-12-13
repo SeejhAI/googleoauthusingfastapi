@@ -17,6 +17,10 @@ async def create_user(user_data: user_schemas.GetUser = Body(...)):
     Returns:
         User: The created user data.
     """
+    user_exists = session.query(User).filter(User.username == user_data.username).first() or session.query(User).filter(User.email == user_data.email).first()
+    if user_exists:
+        raise HTTPException(status_code=400, detail="Username or email already registered")
+
     # Hash the password
     hashed_password = hash_helper.hash(user_data.hashed_password)
     user_data.hashed_password = hashed_password
