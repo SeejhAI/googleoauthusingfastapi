@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from server.routers import user_router
+from server.routers import (
+    user_router, 
+    auth
+    )
 app = FastAPI(title="Google Auth for FastAPI")
 
 app.add_middleware(
@@ -11,6 +14,7 @@ app.add_middleware(
     allow_credentials=True,
 )
 app.include_router(user_router.router)
+app.include_router(auth.router)
 @app.get("/ping")
 def health_check():
     """Health check."""
