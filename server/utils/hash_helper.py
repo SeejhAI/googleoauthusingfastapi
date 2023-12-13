@@ -7,7 +7,7 @@ def hash(password: str)-> str:
     return pwd_context.hash(password)
 
 
-def verify(plain_password, hashed_password):
+def varify(plain_password, hashed_password):
     try:
         # pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
         result = pwd_context.verify(plain_password, hashed_password)
