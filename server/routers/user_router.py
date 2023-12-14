@@ -5,6 +5,8 @@ from server.models.models import User
 from server.schemas import user_schemas
 from server.utils import hash_helper
 
+
+
 router = APIRouter(prefix="/user", tags=["User CRUD"])
 @router.post("/create", status_code=status.HTTP_201_CREATED)
 async def create_user(user_data: user_schemas.GetUser = Body(...)):
