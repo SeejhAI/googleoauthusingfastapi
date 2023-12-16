@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from server.utils.rate_limit import rate_limited
 from server.routers import (
     user_router, 
     auth
@@ -15,8 +16,10 @@ app.add_middleware(
 )
 app.include_router(user_router.router)
 app.include_router(auth.router)
+
 @app.get("/ping")
-def health_check():
+@rate_limited(max_calls=10, time_frame=30)
+def health_check(request: Request):
     """Health check."""
 
     return {"message": "Hello I am working!"}
