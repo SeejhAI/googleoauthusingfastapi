@@ -3,6 +3,19 @@ from functools import wraps
 from fastapi import HTTPException, Request, status
 def rate_limited(max_calls: int, time_frame:int):
     def decorator(func):
+        """
+        Decorator function that enforces rate limiting for an async endpoint.
+
+        Args:
+            func (Callable): The function to be decorated.
+
+        Returns:
+            Callable: The decorated function that enforces rate limiting.
+
+        Raises:
+            HTTPException: If the rate limit is exceeded.
+
+        """
         calls = []
         @wraps(func)
         async def wrapper(request: Request, *args, **kwargs):
