@@ -30,3 +30,8 @@ def intro():
     This Endpoint for intro to this backend
     """
     return {"message": "Welcome to the oauth Backend"}
+
+## trying to add firebase auth in fastapi 
+@app.post("/signup")
+async def create_an_account():
+    pass
